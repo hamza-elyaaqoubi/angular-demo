@@ -1,0 +1,12 @@
+.remove {
+    float: right;
+}
+
+.add {
+    margin-top: 12px;
+    margin-left: 240px;
+}
+
+.name-list {
+    display: inline-block;
+}
