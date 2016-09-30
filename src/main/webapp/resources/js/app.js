@@ -1,23 +1,31 @@
-var angularDemo = angular.module('angularDemo', []);
+var app = angular.module('customersApp', ['ngRoute']);
 
-angularDemo.controller('mainController', function ($scope) {
-    $scope.names = [];
-    $scope.length = $scope.names.length;
-    
-    $scope.addName = function () {
-        var newName = $scope.newName;
-        if(newName && $scope.names.indexOf(newName) == -1) {
-            $scope.names.push(newName);
-            $scope.newName = '';
-            $scope.length = $scope.names.length;
-        } else {
-            console.log("the name '" + newName + "' is empty or *already exist in the model");
-        }
-    };
-    
-    $scope.removeName = function (name) {
-        var index = $scope.names.indexOf(name);
-        $scope.names.splice(index, 1);
-        $scope.length = $scope.names.length;
-    }
+//This configures the routes and associates each route with a view and a controller
+app.config(function ($routeProvider) {
+    $routeProvider
+        .when('/',
+        {
+            controller: 'HomeController',
+            templateUrl: '/partials/home.jsp'
+        })
+        .when('/customers',
+        {
+            controller: 'CustomersController',
+            templateUrl: '/partials/customers.jsp'
+        })
+        .when('/customerorders/:customerID',
+        {
+            controller: 'CustomerOrdersController',
+            templateUrl: '/partials/customerOrders.jsp'
+        })
+        .when('/orders',
+        {
+            controller: 'OrdersController',
+            templateUrl: '/partials/orders.jsp'
+        })
+        .otherwise({redirectTo: '/' });
 });
+
+
+
+
